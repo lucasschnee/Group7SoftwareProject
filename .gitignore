@@ -1,0 +1,11 @@
+# Node modules
+/node_modules
+/client/node_modules
+/server/node_modules
+
+# Environment Variables
+/server/.env
+
+# System Files
+.DS_Store  # For macOS
+Thumbs.db  # For Windows
