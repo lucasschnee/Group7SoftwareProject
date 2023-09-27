@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css'; // You can create this for custom CSS
 
 ReactDOM.render(
   <React.StrictMode>
