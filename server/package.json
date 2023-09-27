@@ -2,9 +2,9 @@
   "name": "vandylifts",
   "version": "1.0.0",
   "description": "A simple project for vandylifts.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
