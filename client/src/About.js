@@ -3,7 +3,7 @@ import React from 'react';
 function About() {
   return (
     <div>
-      <h2>Welcome to Vandylifts</h2>
+      <h2>Welcome to Vandylifts!</h2>
       <p>
         Where passion for fitness and the power of community come together!
       </p>
@@ -24,6 +24,17 @@ function About() {
       </p>
 
       <p>Founded in 2022 by Melanie Leguizamon.</p>
+
+      <h4>Useful Links:</h4>
+      <p>
+      <a href="https://anchorlink.vanderbilt.edu/organization/vandylifts">Anchor Link</a>
+      </p>
+      <p>
+      <a href="https://instagram.com/vandylifts_">Instagram</a>
+      </p>
+      <p>
+      <a href="https://groupme.com/join_group/86843176/zdmNe7F1">GroupMe</a>
+      </p>
     </div>
   );
 }
