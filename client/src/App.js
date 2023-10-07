@@ -5,6 +5,7 @@ import Trainers from './Trainers';
 import Schedule from './Schedule';
 import Discussion from './Discussion';
 import './App.css';
+import Footer from './Footer';
 
 function App() {
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 
 function Trainers() {
     return (
@@ -53,7 +54,7 @@ function Trainers() {
                 <p>Hometown:</p>
                 <p>Fun Fact:</p>
             </div>
-
+        <Footer />
         </div>
     );
 }

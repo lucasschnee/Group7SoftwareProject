@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Footer from './Footer';
 
 function Schedule() {
     // Example list of trainers and times for filtering
@@ -45,6 +46,7 @@ function Schedule() {
 
             {/* Placeholder for schedule content */}
             <p>*Insert schedule feature here*</p>
+            <Footer />
         </div>
     );
 }

@@ -1,0 +1,6 @@
+.Footer {
+    position: fixed;  /* Fixed positioning */
+    right: 10px;      /* 10 pixels from the right edge */
+    bottom: 10px;     /* 10 pixels from the bottom edge */
+    z-index: 1000;    /* Ensure it's on top of other elements */
+}

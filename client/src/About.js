@@ -24,6 +24,7 @@ function About() {
       </p>
 
       <p>Founded in 2022 by Melanie Leguizamon.</p>
+      <Footer />
     </div>
   );
 }

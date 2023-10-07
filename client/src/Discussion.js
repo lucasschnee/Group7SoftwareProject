@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Footer from './Footer';
 
 function Discussion() {
     const [announcements, setAnnouncements] = useState([
@@ -19,6 +20,7 @@ function Discussion() {
                     </div>
                 ))}
             </div>
+            <Footer />
         </div>
     );
 }
