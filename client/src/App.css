@@ -1,0 +1,20 @@
+nav {
+  text-align: center;
+  margin-top: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around; /* Evenly spaced items */
+}
+
+nav li {
+  display: inline-block;
+}
+
+h1.app-title {
+  text-align: center;
+  margin: 30px 0;
+}
