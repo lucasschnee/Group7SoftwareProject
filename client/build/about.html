@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Preview</title>
+  <!-- Include React and React DOM from CDN -->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="module" src="About.js"></script>
+<script>
+  // Mount the component to the root element
+  ReactDOM.render(
+    React.createElement(About.default),
+    document.getElementById('root')
+  );
+</script>
+
+</body>
+</html>
