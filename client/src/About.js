@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 
 function About() {
   return (
@@ -24,6 +25,7 @@ function About() {
       </p>
 
       <p>Founded in 2022 by Melanie Leguizamon.</p>
+<<<<<<< HEAD
 
       <footer className="footer">
         <p>&copy; 2023 VandyLifts</p>
@@ -37,6 +39,9 @@ function About() {
           <a href="https://groupme.com/join_group/86843176/zdmNe7F1">GroupMe</a>
         </p>
       </footer>
+=======
+      <Footer />
+>>>>>>> origin/main
     </div>
   );
 }

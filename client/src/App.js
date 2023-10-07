@@ -5,12 +5,13 @@ import Trainers from './Trainers';
 import Schedule from './Schedule';
 import Discussion from './Discussion';
 import './App.css';
+import Footer from './Footer';
 
 function App() {
   return (
     <Router>
       <div className="app-container">
-        <h1 className="app-title"><Link to="/">App</Link></h1>
+        <h1 className="app-title"><Link to="/">VandyLifts</Link></h1>
         <nav>
           <ul>
             <li><Link to="/about">About</Link></li>
@@ -21,7 +22,7 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<div>Main App Content</div>} />
+          <Route path="/" element={<div><em>A fitness club for bringing like-minded people together</em></div>} />
           <Route path="/about" element={<About />} />
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/schedule" element={<Schedule />} />
