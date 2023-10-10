@@ -2,19 +2,20 @@ const firebase = require("firebase/app");
 const express = require('express');
 
 const userRoutes = require('./routes/userRoutes')
+const sessionsRoutes = require('./routes/sessionRoutes')
+const notificationRoutes = require('./routes/notificationRoutes')
 
 const PORT = 4000
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCc7X1IWwzV-n2eIDcSe605brdRWAHYQrQ",
-    authDomain: "swe-project-304dd.firebaseapp.com",
-    databaseURL: "https://swe-project-304dd-default-rtdb.firebaseio.com",
-    projectId: "swe-project-304dd",
-    storageBucket: "swe-project-304dd.appspot.com",
-    messagingSenderId: "414472923061",
-    appId: "1:414472923061:web:f9cc87465d661fee24dbfc",
-    measurementId: "G-7TWZD35N23"
-  };
+    apiKey: "AIzaSyCUAxlqykTWAXTAzmJhavNmA5x8-rh5PO8",
+    authDomain: "jam-together-110d8.firebaseapp.com",
+    projectId: "jam-together-110d8",
+    storageBucket: "jam-together-110d8.appspot.com",
+    messagingSenderId: "33496707495",
+    appId: "1:33496707495:web:403ae1c49bfcec67a58682",
+    databaseURL: "https://jam-together-110d8-default-rtdb.firebaseio.com"
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -32,9 +33,15 @@ app.use((req, res, next) => {
   next()
 })
 
+// get routes from workout.js file
+// first param indicates we only want to use workoutRoutes
 // if we get a request from that page
 app.use('/api/user', userRoutes);
+app.use('/api/sessions', sessionsRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 const server = app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+

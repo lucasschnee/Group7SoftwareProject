@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import About from './About';
 import Trainers from './Trainers';
@@ -6,9 +6,51 @@ import Schedule from './Schedule';
 import Discussion from './Discussion';
 import './App.css';
 import Footer from './Footer';
+import firebase from './firebase';
 
 function App() {
+  
+  const [trainers, setTrainers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+
+  const ref = firebase.firestore().collection("trainers");
+  
+
+  function getTrainers() {
+    setLoading(true);
+    ref.onSnapshot ((querySnapshot) => {
+      const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        }); 
+        setTrainers(items);
+        setLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    getTrainers();
+  }, []);
+
+  //console.log(ref);
+  
+  if (loading){
+    return <h1>Loading...</h1>
+  }
+  
+  
   return (
+    <div>
+    <div>
+      <h1>Trainers</h1>
+      {trainers.map((trainer) => ( 
+        <div key={trainer.title}>
+          <h2>nknk</h2> 
+        </div>
+      ))}
+      </div>
+
     <Router>
       <div className="app-container">
         <h1 className="app-title"><Link to="/">VandyLifts</Link></h1>
@@ -30,6 +72,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </div>
   );
 }
 
