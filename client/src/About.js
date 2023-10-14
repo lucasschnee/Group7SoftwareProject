@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Footer from './Footer';
 
 function About() {
@@ -20,7 +21,7 @@ Our goal goes beyond physical strength or endurance. It's about building a commu
 Vandylifts is more than just a fitness club. It's a platform where seasoned trainers volunteer their time and expertise to train fellow students for free. Each trainee is paired with a dedicated trainer over multiple sessions, ensuring continuity and personalized attention.
 </p>
 <p>
-Whether you are a fitness novice or just looking for guidance to fine-tune your workouts, we're here for you. Please use our scheduling feature to match with a trainer, or our discussion page to view new announcements.
+Whether you are a fitness novice or just looking for guidance to fine-tune your workouts, we're here for you. Please use our <Link to="/schedule">scheduling feature</Link> to match with a trainer, or our <Link to="/discussion">discussion page</Link> to view new announcements.
 </p>
 </div>
       <p>Founded in 2022 by Melanie Leguizamon.</p>
