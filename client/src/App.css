@@ -1,6 +1,8 @@
 nav {
   text-align: center;
   margin-top: 20px;
+  background-color: #333; /* Add a background color for better visibility */
+  padding: 5px; /* Add some padding for spacing */
 }
 
 nav ul {
@@ -12,19 +14,280 @@ nav ul {
 
 nav li {
   display: inline-block;
+  margin: 0 10px; /* Add some spacing between navigation items */
+}
+
+nav a {
+  text-decoration: none;
+  color: #cac2c2; /* Set the text color to white for better contrast */
+  font-weight: bold;
+  /*text-transform: lowercase;*/
+}
+
+a {
+  color: #fff; /* Set the link color to red */
+  text-decoration: none;
 }
 
 h1.app-title {
   text-align: center;
   margin: 30px 0;
+  color: #fff; /* Set text color to white for better visibility */
+  /*font-size: 18px;*/
+  text-decoration: none;
+  letter-spacing: 5px;
+  /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add a subtle text shadow for emphasis */
 }
 
 body {
-  background-image: url('/gym_image.png');
+  background-image: url('/man_lifting1.png');
   background-size: cover; /* This ensures the image covers the entire viewport */
   background-repeat: no-repeat; /* This prevents the image from repeating if it's too small for the container */
   background-attachment: fixed; /* This makes sure the background stays in place while the content scrolls */
   background-position: center center; /* This centers the image */
+  text-align: center;
+  color: #fff; /* Set the default text color to white for better contrast */
+  font-family: 'Trebuchet MS', sans-serif; /* Choose a readable font */
+}
+
+/* Add some transparency to the background for a modern look */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for the desired transparency */
+  z-index: -1; /* Ensure this pseudo-element stays behind the content */
+}
+
+.slogan{
+  margin-top: 60px;
+  font-family: 'Andale Mono', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  /*letter-spacing: .5px;*/
+}
+
+.join{
+  margin-top: 80px;
+  font-family: 'Andale Mono', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  font-style: normal;
+  text-transform: uppercase;
+  /*letter-spacing: .5px;*/
+}
+
+.signup-button {
+  margin-top: -10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #ffcc00;
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.signup-button:hover {
+  background-color: #988c3f; /* Darker green color on hover */
+}
+
+.welcome,
+.welcome-message {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffcc00;
+  font-family: 'Andale Mono', sans-serif;
+  text-align: center;
+}
+
+/* Styling for .welcome */
+.welcome {
+  text-shadow: 2px 2px 4px rgba(239, 229, 182, 0.8);
+  margin-top: -10px;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+/* Styling for .welcome-message */
+.welcome-message {
+  text-shadow: 2px 2px 4px rgba(239, 229, 182, 0.8);
+  margin-top: -28px;
+  font-size: 13px;
 }
 
 
+.info {
+  text-align: left;
+  margin-top: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  /*background-color: #1b1b1b; /* Black background */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;              /* White text color */
+}
+
+.info h3 {
+  color: #ffcc00; /* Yellow color for headings */
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.info p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ccc; /* Light grey color for text */
+}
+
+.info p:last-child {
+  margin-bottom: 0;
+}
+
+.info p:first-of-type {
+  margin-top: 0;
+}
+
+.info p,
+.info h3 {
+  margin-top: 20px;
+}
+
+<<<<<<< Updated upstream
+
+=======
+/* Container styling */
+.meet-trainers {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  /*background-color: #1b1b1b; /* Black background */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;              /* White text color */
+}
+
+/* Heading styling */
+.meet-trainers h2 {
+  color: #ffcc00; /* Yellow color for headings */
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Andale Mono', sans-serif;
+  text-transform: uppercase;
+}
+
+/* Trainer box styling */
+.trainer {
+  background-color: #333; /* Dark grey background for trainers */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* Trainer name styling */
+.trainer h3 {
+  color:#ffcc00;/* Yellow color for trainer names */
+  margin-bottom: 10px;
+}
+
+/* Position and Fun Fact styling */
+.trainer p {
+  color: #ccc; /* Light grey color for text */
+  margin-bottom: 8px;
+}
+
+/* Container styling */
+.schedule {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  /*background-color: #1b1b1b; /* Black background */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;              /* White text color */
+}
+
+/* Heading styling */
+.schedule h2 {
+  color: #ffcc00; /* Yellow color for headings */
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Andale Mono', sans-serif;
+  text-transform: uppercase;
+}
+
+/* Input and Select styling */
+.schedule input,
+.schedule select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #333; /* Dark grey background */
+  color: #fff;            /* White text color */
+  border: 1px solid #666; /* Grey border */
+  border-radius: 5px;
+}
+
+/* Dropdown options styling */
+.schedule select option {
+  background-color: #333; /* Dark grey background */
+  color: #fff;            /* White text color */
+}
+
+/* Placeholder text styling */
+.schedule p {
+  text-align: center;
+  font-style: italic;
+  color: #ccc; /* Light grey color for text */
+}
+
+/* Container styling */
+.discussion-board {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  /*background-color: #1b1b1b; /* Black background */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;              /* White text color */
+}
+
+/* Heading styling */
+.discussion-board h2 {
+  color: #ffcc00; /* Yellow color for headings */
+  text-align: center;
+  margin-bottom: 20px;
+
+  font-family: 'Andale Mono', sans-serif;
+  text-transform: uppercase;
+}
+
+/* Announcements container styling */
+.announcements {
+  display: grid;
+  grid-gap: 20px;
+}
+
+/* Individual announcement styling */
+.announcement {
+  background-color: #333; /* Dark grey background */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Announcement title styling */
+.announcement h3 {
+  color: #ffcc00; /* Yellow color for announcement titles */
+  margin-bottom: 10px;
+}
+
+/* Announcement content styling */
+.announcement p {
+  color: #ccc; /* Light grey color for text */
+  margin-bottom: 8px;
+}
+>>>>>>> Stashed changes

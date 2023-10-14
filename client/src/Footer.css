@@ -1,6 +1,10 @@
 .Footer {
-    position: fixed;  /* Fixed positioning */
-    right: 10px;      /* 10 pixels from the right edge */
-    bottom: 10px;     /* 10 pixels from the bottom edge */
-    z-index: 1000;    /* Ensure it's on top of other elements */
+    
+    position: relative;  /* Relative positioning */
+    bottom: 0;          /* Align to the bottom of its containing element */
+    right: 0;           /* Align to the right of its containing element */
+    z-index: 1000;      /* Ensure it's on top of other elements */
+    color: #fff;
+    text-align: right;
+    
 }

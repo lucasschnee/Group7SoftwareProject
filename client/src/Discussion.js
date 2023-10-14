@@ -10,6 +10,7 @@ function Discussion() {
 
     return (
         <div>
+        <div className="discussion-board">
             <h2>Discussion Board</h2>
             
             <div className="announcements">
@@ -19,6 +20,7 @@ function Discussion() {
                         <p>{announcement.content}</p>
                     </div>
                 ))}
+            </div>
             </div>
             <Footer />
         </div>

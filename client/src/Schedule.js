@@ -22,7 +22,8 @@ function Schedule() {
 
     return (
         <div>
-            <h2>Schedule</h2>
+        <div className = "schedule">
+            <h2>Schedule a Session</h2>
             
             {/* Search bar */}
             <input 
@@ -46,6 +47,7 @@ function Schedule() {
 
             {/* Placeholder for schedule content */}
             <p>*Insert schedule feature here*</p>
+            </div>
             <Footer />
         </div>
     );

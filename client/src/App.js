@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <h1 className="app-title"><Link to="/">VandyLifts</Link></h1>
+        <h1 className="app-title"><Link to="/">VANDYLIFTS</Link></h1>
         <nav>
           <ul>
             <li><Link to="/about">About</Link></li>
@@ -22,12 +22,28 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<div><em>A fitness club for bringing like-minded people together</em></div>} />
+          <Route path="/" element={
+          <div>
+          <div className="welcome">
+    <h2>Welcome</h2></div>
+    <div className="welcome-message">
+    <p >
+      to Vanderbilt's premier lifting mentorship organization
+    </p></div>
+          <div className="join">
+          <p>Join us today.</p>
+          <div>
+          <button class="signup-button">SIGN UP</button>
+         </div>
+          </div>
+        </div>}
+          />
           <Route path="/about" element={<About />} />
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/discussion" element={<Discussion />} />
         </Routes>
+      
       </div>
     </Router>
   );

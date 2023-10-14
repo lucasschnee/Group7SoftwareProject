@@ -4,6 +4,7 @@ import Footer from './Footer';
 function Trainers() {
     return (
         <div>
+        <div className="meet-trainers">
             <h2>Meet the Trainers</h2>
 
             <div className="trainer">
@@ -53,6 +54,7 @@ function Trainers() {
                 <p>Position: Social Events Chair</p>
                 <p>Hometown:</p>
                 <p>Fun Fact:</p>
+            </div>
             </div>
         <Footer />
         </div>
