@@ -1,56 +1,30 @@
-/* Improved Navigation Styles */
 nav {
   text-align: center;
   margin-top: 20px;
-  background-color: #333; /* Add a background color for better visibility */
-  padding: 10px; /* Add some padding for spacing */
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; /* Evenly spaced items */
 }
 
 nav li {
   display: inline-block;
-  margin: 0 10px; /* Add some spacing between navigation items */
 }
 
-nav a {
-  text-decoration: none;
-  color: #fff; /* Set the text color to white for better contrast */
-  font-weight: bold;
-}
-
-/* Improved Header Styles */
 h1.app-title {
   text-align: center;
   margin: 30px 0;
-  color: #fff; /* Set text color to white for better visibility */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add a subtle text shadow for emphasis */
 }
 
-/* Improved Body Styles */
 body {
   background-image: url('/gym_image.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center center;
-  color: #fff; /* Set the default text color to white for better contrast */
-  font-family: 'Arial', sans-serif; /* Choose a readable font */
+  background-size: cover; /* This ensures the image covers the entire viewport */
+  background-repeat: no-repeat; /* This prevents the image from repeating if it's too small for the container */
+  background-attachment: fixed; /* This makes sure the background stays in place while the content scrolls */
+  background-position: center center; /* This centers the image */
 }
 
-/* Add some transparency to the background for a modern look */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for the desired transparency */
-  z-index: -1; /* Ensure this pseudo-element stays behind the content */
-}
+
