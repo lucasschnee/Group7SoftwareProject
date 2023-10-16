@@ -28,12 +28,19 @@ app.use(express.json())
 
 // will run every time a request comes in, simply logs for debug
 app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin","*");
   console.log('connected to path:', req.path, 'with method:', req.method)
   next()
 })
 
+app.get("/message", (req, res) => {
+    res.json({ message: "Hello from server!" });
+  });
+  
+
 // if we get a request from that page
 app.use('/api/user', userRoutes);
+
 
 const server = app.listen(PORT, () => {
     console.log(`dhsjhdjServer is running on http://localhost:${PORT}`);

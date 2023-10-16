@@ -13,28 +13,26 @@ const test = async (req, res) => {
       return res.status(400).json({ error: error.message })
     }
 }
-//Hello 
 
 
 const getUser = async (req, res) => {
-  console.log("hello")
-//   const uid = req.params.uid;
-
-//   // fetch from the database
-//   try {
-//     const dbRef = firebase.ref(firebase.getDatabase());
-//     firebase.get(firebase.child(dbRef, `users/${uid}`)).then((snapshot) => {
-//       if (snapshot.exists()) {
-//         return res.status(200).json(snapshot.val());
-//       } else {
-//         console.log("No data available");
-//       }
-//     }).catch((error) => {
-//       console.error(error);
-//     });
-//   } catch (error) {
-//     res.status(400).json({ error: error.message })
-//   }
+  const uid = req.params.uid;
+  
+  // fetch from the database
+  try {
+    const dbRef = firebase.ref(firebase.getDatabase());
+    firebase.get(firebase.child(dbRef, `${uid}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        return res.status(200).json(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
 }
 
 

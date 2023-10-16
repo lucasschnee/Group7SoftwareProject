@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import About from './About';
 import Trainers from './Trainers';
@@ -8,6 +8,26 @@ import './App.css';
 import Footer from './Footer';
 
 function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/user/id")
+      .then((res) => res.json())
+      .then((data) => setMessage(data));
+  }, []);
+
+
+  const [trainerName, setName] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:4000/api/user/users")
+      .then((res) => res.json())
+      .then((data) => setName(data));
+  }, []);
+
+  // PUT THESE MESSAGES BELOW TO DISPLAY THE STUFF IN DB
+  //<h1>{message}</h1>
+  //<h1>{trainerName}</h1> 
+
   return (
   <Router>
   <div className="app-container">
