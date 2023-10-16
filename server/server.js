@@ -36,5 +36,5 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes);
 
 const server = app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`dhsjhdjServer is running on http://localhost:${PORT}`);
 });

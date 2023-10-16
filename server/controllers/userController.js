@@ -17,6 +17,7 @@ const test = async (req, res) => {
 
 
 const getUser = async (req, res) => {
+  console.log("hello")
 //   const uid = req.params.uid;
 
 //   // fetch from the database
