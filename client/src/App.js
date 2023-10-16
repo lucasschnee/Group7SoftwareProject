@@ -8,10 +8,10 @@ import './App.css';
 import Footer from './Footer';
 
 function App() {
-  const [message, setMessage] = useState("");
 
+  const [message, setMessage] = useState("");
   useEffect(() => {
-    fetch("http://localhost:4000/api/user/id")
+    fetch("http://localhost:4000/api/user/id") // by default fetch will use get
       .then((res) => res.json())
       .then((data) => setMessage(data));
   }, []);
@@ -24,13 +24,16 @@ function App() {
       .then((data) => setName(data));
   }, []);
 
+
+
   // PUT THESE MESSAGES BELOW TO DISPLAY THE STUFF IN DB
-  //<h1>{message}</h1>
+  
   //<h1>{trainerName}</h1> 
 
   return (
   <Router>
   <div className="app-container">
+  
   <h1 className="app-title"><Link to="/">VANDYLIFTS</Link></h1>
   <nav>
   <ul>

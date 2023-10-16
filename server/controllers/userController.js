@@ -36,7 +36,57 @@ const getUser = async (req, res) => {
 }
 
 
+const searchForTrainer = async (req, res) => {
+  const trainerName = req.params.trainerName;
+  
+  // fetch from the database
+  console.log(`trainers/${trainerName}`);
+  try {
+    const dbRef = firebase.ref(firebase.getDatabase());
+    firebase.get(firebase.child(dbRef, `trainers/${trainerName}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        return res.status(200).json(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+// const searchForTrainer = async (req, res) => {
+//   const trainerName = req.params.trainerName;
+
+//   console.log(trainerName)
+
+//   // fetch from the database
+//   try {
+//     const dbRef = firebase.ref(firebase.getDatabase());
+//     firebase.get(firebase.child(dbRef, `trainers/${trainerName}`)).then((snapshot) => {
+
+//       if (snapshot.exists()) {
+        
+//         const trainerData = snapshot.val()
+//         return res.status(200).json(trainerData);
+//       } else {
+//         console.log("No Trainer Found");
+//       }
+//     }).catch((error) => {
+//       console.error(error);
+//     });
+//   } catch (error) {
+//     res.status(400).json({ error: error.message })
+//   }
+// }
+
+
+
+
 module.exports = {
   getUser,
-  test
+  test,
+  searchForTrainer
 };

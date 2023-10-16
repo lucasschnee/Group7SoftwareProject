@@ -19,8 +19,26 @@ function Schedule() {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedTrainer, setSelectedTrainer] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
-    
-    
+
+    const handleClick = async () => {
+        console.log("working");
+
+        // first get potential friend's UID
+        let response = await fetch('http://localhost:4000/api/user/'+searchTerm, {
+            method: 'GET'
+        })
+        
+        if (!response.ok) {
+            console.log("no trainer with name")
+            return;
+        } else {
+            data = await response.json();
+            console.log("found trainer");
+            console.log(data);
+        }
+    }
+
+
     return (
     <div>
     <div className = "schedule">
@@ -32,6 +50,8 @@ function Schedule() {
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
     />
+    <button onClick={handleClick}>Submit</button>
+
     {/* Trainer filter dropdown */}
     <select value={selectedTrainer} onChange={(e) => setSelectedTrainer(e.target.value)}>
     <option value=''>Filter by Trainer</option>
