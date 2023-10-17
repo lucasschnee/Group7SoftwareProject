@@ -33,7 +33,11 @@ function App() {
   return (
   <Router>
   <div className="app-container">
-  
+  <h1>{message}</h1> 
+  <h1>{trainerName}</h1> 
+  <div id= "TrainerName"></div>
+  <div id= "TrainerHometown"></div>
+  <div id= "TrainerPosition"></div>
   <h1 className="app-title"><Link to="/">VANDYLIFTS</Link></h1>
   <nav>
   <ul>

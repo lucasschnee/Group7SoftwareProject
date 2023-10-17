@@ -1,3 +1,4 @@
+const { json } = require("express");
 const firebase = require("firebase/database");
 
 
@@ -18,6 +19,7 @@ const test = async (req, res) => {
 const getUser = async (req, res) => {
   const uid = req.params.uid;
   
+  console.log("Hello World");
   // fetch from the database
   try {
     const dbRef = firebase.ref(firebase.getDatabase());
@@ -37,14 +39,17 @@ const getUser = async (req, res) => {
 
 
 const searchForTrainer = async (req, res) => {
-  const trainerName = req.params.trainerName;
+  let trainerName = req.params.trainerName;
+  trainerName = trainerName.replace(/\s+/g, ''); // sanitizes the response 
   
+  console.log("Bye Wporld");
   // fetch from the database
   console.log(`trainers/${trainerName}`);
   try {
     const dbRef = firebase.ref(firebase.getDatabase());
     firebase.get(firebase.child(dbRef, `trainers/${trainerName}`)).then((snapshot) => {
       if (snapshot.exists()) {
+        console.log("hello1234", snapshot.val());
         return res.status(200).json(snapshot.val());
       } else {
         console.log("No data available");
