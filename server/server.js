@@ -34,9 +34,12 @@ app.use((req, res, next) => {
 })
 
 app.get("/message", (req, res) => {
-    res.json({ message: "Hello from server!" });
-  });
-  
+  res.json({ message: "Hello from server!" });
+});
+
+
+
+
 
 // if we get a request from that page
 app.use('/api/user', userRoutes);

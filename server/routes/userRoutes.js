@@ -9,6 +9,7 @@ router.put('/test', test);
 //router.post('/search-for-trainer', searchForTrainer);
 
 router.get('/:uid', getUser);
+
 router.get('/trainer/:trainerName', searchForTrainer);
 
 
