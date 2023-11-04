@@ -5,6 +5,7 @@
 
 # Environment Variables
 /server/.env
+/build
 
 # System Files
 .DS_Store  # For macOS
