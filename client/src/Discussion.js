@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { db } from './firebase'; // Make sure this path is correct
+import { db } from './firebase'; 
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import Footer from './Footer';
+import './Discussion.css'; 
 
 function Discussion() {
   const [announcements, setAnnouncements] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
 
-  // Reference to the discussions collection in Firestore
+
   const discussionsRef = collection(db, 'discussions');
 
-  // Function to add a new post to Firestore
+
   const addPost = async () => {
     await addDoc(discussionsRef, {
       title: newTitle,
@@ -19,52 +20,73 @@ function Discussion() {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    fetchPosts(); // Re-fetch posts after adding
+    setNewTitle(''); 
+    setNewContent(''); 
+    fetchPosts(); 
   };
 
-  // Function to delete a post from Firestore
+  
   const deletePost = async (id) => {
     const postDoc = doc(db, 'discussions', id);
     await deleteDoc(postDoc);
-    fetchPosts(); // Re-fetch posts after deleting
+    fetchPosts(); 
   };
 
-  // Function to fetch posts from Firestore
+
   const fetchPosts = async () => {
     const snapshot = await getDocs(discussionsRef);
-    const posts = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-    setAnnouncements(posts);
+    const posts = snapshot.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id,
+      createdAt: doc.data().createdAt.toDate() 
+    }));
+    setAnnouncements(posts.sort((a, b) => b.createdAt - a.createdAt));
   };
 
-  // Fetch posts on component mount
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString("en-US", {
+      year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+  };
+
+
   useEffect(() => {
     fetchPosts();
   }, []);
 
   return (
-    <div>
+    <div className="discussion-container">
       <div className="discussion-board">
         <h2>Discussion Board</h2>
         
-        <input
-          type="text"
-          value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
-          placeholder="Title"
-        />
-        <textarea
-          value={newContent}
-          onChange={(e) => setNewContent(e.target.value)}
-          placeholder="Content"
-        />
-        <button onClick={addPost}>Add Post</button>
+        <div className="input-group">
+          <input
+            type="text"
+            className="input-title"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            placeholder="Title"
+          />
+          <textarea
+            className="input-content"
+            value={newContent}
+            onChange={(e) => setNewContent(e.target.value)}
+            placeholder="Content"
+          />
+          <button className="btn-add-post" onClick={addPost}>Add Post</button>
+        </div>
 
         <div className="announcements">
           {announcements.map(announcement => (
             <div key={announcement.id} className="announcement">
-              <h3>{announcement.title}</h3>
-              <p>{announcement.content}</p>
-              <button onClick={() => deletePost(announcement.id)}>Delete</button>
+              <div className="announcement-header">
+                <h3>{announcement.title}</h3>
+                <span className="date-posted">{formatDate(announcement.createdAt)}</span>
+              </div>
+              <p className="announcement-content">{announcement.content}</p>
+              <button className="btn-delete-post" onClick={() => deletePost(announcement.id)}>Delete</button>
             </div>
           ))}
         </div>
