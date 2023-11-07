@@ -16,7 +16,7 @@ function Schedule() {
     const trainers = [
     "Melanie Leguizamon",
     "Henry Jonokuchi",
-    "Matthew Stein II",
+    "Matthew Stein",
     "Cole Ellis",
     "Sarah Buonnano",
     "Alyssa Bersamin",
@@ -41,6 +41,10 @@ const [time, setTime] = useState([]);
 // const [checkboxes, setCheckboxes] = useState([]);
 const [selectedDayTime, setSelectedDayTime] = useState([]); // Array of bools, where true means they selected that day/time
 const [checked, setChecked] = useState(false);
+const [bookedTimeSlots, setBookedTimeSlots] = useState(Array(times.length).fill(''));
+const [bookedDays, setBookDays] = useState(Array(times.length).fill(''))
+const [timeSlotBookingStatus, setTimeSlotBookingStatus] = useState({});
+
 
 
 const handleClick = async () => {
@@ -123,59 +127,137 @@ const handleClick2 = async () => {
 };
 
 
-// Have a function which is caleld when the submit button is pressed
-// This will take the boolean array, it will go through each day/time combo
-// If the position in the boolean array is true, then you know that time was selected
-// You can pass it to the backend in a http post
-// And then mark it as taken/remove it
+const handleCheckSubmit = async () => {
+  try {
 
-function handleCheckSubmit(boolArray) // this int is the index of the checkbox
-{
-  for (let i = 0; i < boolArray.length; i++) {
-    if(i){
-      console.log(`hello`);
-      // THIS IS WHERE I WANT TO REMOVE SOMETHING FROM THE DATABASE
+    const resp = await fetch("http://localhost:4000/api/user/trainer/" + selectedTrainer, {
+        method: "GET",
+      });
 
+      const data2 = await resp.json();
+
+      setCurrentTrainerName(data2.name);
+      setCurrentTrainerTimes(data2.Times);
+      //setTimeSlotBookingStatus(data2.Times);
+
+    // Create an object to send to the server, including the selected time slots.
+    const data = {
+      trainerName: currentTrainerName, // Replace with the trainer's name.
+      timeSlots: bookedTimeSlots,
+      arrayOfDays: bookedDays
+    };
+
+    // for (const key in data2.Times) {
+    //   data.timeSlots.push(key);
+    // }
+    
+    
+    // Now, the timeSlots array will contain all time slots, both booked and unbooked
+    console.log(data.timeSlots);
+    console.log(data.arrayOfDays);
+
+  
+
+    const response = await fetch("http://localhost:4000/api/user/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+       body: JSON.stringify(data)
+      
+    });
+
+    
+    
+    if (response.ok) {
+      console.log("Booking successful!");
+    } else {
+      console.error("Booking failed.");
     }
+  } catch (error) {
+    console.error("Error in async", error);
   }
-}
+};
+
 
 // Accepts index which will be used to set true on selectedDayTime
 // handle change when button pressed accepts an int
 // 
 
-function handleCheck(i) // this int is the index of the checkbox
-{
-  // let arr = selectedDayTime
-  // arr[i] = true;
-  // setSelectedDayTime(arr)
-  const updatedSelectedDayTime = [...selectedDayTime];
-  updatedSelectedDayTime[i] = true;
-  setSelectedDayTime(updatedSelectedDayTime);
+// function handleCheck(i) // this int is the index of the checkbox
+// {
+//   // let arr = selectedDayTime
+//   // arr[i] = true;
+//   // setSelectedDayTime(arr)
+//   const updatedSelectedDayTime = [...selectedDayTime];
+//   updatedSelectedDayTime[i] = true;
+//   setSelectedDayTime(updatedSelectedDayTime);
 
+// }
+
+function handleCheck(i,days) {
+  const updatedBookedTimeSlots = [...bookedTimeSlots];
+  updatedBookedTimeSlots[i] = !updatedBookedTimeSlots[i];
+  setBookedTimeSlots(updatedBookedTimeSlots);
+  
+  setBookDays([...bookedDays, days]);
 }
 
-function displayTimes() {
-  let lines = []
 
-  for (let i = 0; i < days.length; i++){
+function displayTimes() {
+  let lines = [];
+
+  for (let i = 0; i < days.length; i++) {
+    const timeSlot = time[i];
+    const isBooked = currentTrainerTimes[days[i]] == 'booked'; // Check if the time slot is booked
+
+    // Define a style object with different styles based on the booking status
+    const slotStyle = {
+      color: isBooked ? 'red' : 'green', // Red if booked, green if available
+      fontWeight: isBooked ? 'bold' : 'normal',
+    };
+
+    const checkboxColor = isBooked ? "red" : "green";
+
+
+
     lines.push(
-      <div>
-        <b>{days[i]}</b> : {time[i]}
+      <div style={slotStyle}>
+        <b>{days[i]}</b>: {timeSlot}
         <Checkbox
-          // checked={checked}
-          onChange={() => handleCheck(i)}
+        //checked={isBooked}
+          onChange={() => handleCheck(i, days[i])}
           inputProps={{ 'aria-label': 'controlled' }}
           color="success"
           style={{ color: 'white' }}
         />
-
       </div>
-    )
+    );
   }
 
-  return lines
+  return lines;
 }
+// function displayTimes() {
+//   let lines = [];
+
+//   for (let i = 0; i < days.length; i++) {
+//     const timeSlot = days[i];
+//     const isBooked = timeSlotBookingStatus[timeSlot] === 'booked'; // Check the booking status
+
+//     lines.push(
+//       <div>
+//         <b>{timeSlot}</b> : {time[i]}
+//         <Checkbox
+//           onChange={() => handleCheck(i, timeSlot)}
+//           inputProps={{ 'aria-label': 'controlled' }}
+//           style={{ color: isBooked ? 'red' : 'green' }} // Set the color based on booking status
+//         />
+//       </div>
+//     );
+//   }
+
+//   return lines;
+// }
 
 
  
@@ -223,7 +305,7 @@ return (
           <h3>Hometown: {currentTrainerHomeTown}</h3>
           <h3>Position: {currentTrainerPosition}</h3>
           <h3>Availability:</h3> {displayTimes()}
-          <button onClick={handleCheckSubmit(selectedDayTime)}>Submit</button>
+          <button onClick={handleCheckSubmit}>Submit</button>
         </div>
       }
       <h2>Test</h2>

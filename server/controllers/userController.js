@@ -2,6 +2,7 @@ const { json } = require("express");
 const firebase = require("firebase/database");
 
 
+
 const test = async (req, res) => {
     const { testdata } = req.body;
   
@@ -15,6 +16,27 @@ const test = async (req, res) => {
     }
 }
 
+const bookSession = async (req, res) => {
+  console.log(req.body);
+  const { trainerName, timeSlots, arrayOfDays } = req.body; 
+
+  // update the user's instruments
+  try {
+    const db = firebase.getDatabase();
+
+    for (i = 0; i < arrayOfDays.length; i++){
+      if(arrayOfDays[i] != ""){
+
+        await firebase.set(firebase.ref(db, `/trainers/` + trainerName.replace(/\s+/g, '') + `/Times/` + arrayOfDays[i]), "booked")
+
+      }
+    }
+    
+    return res.status(200).json(); // 200 is an error code for success
+  } catch (error) {
+    return res.status(400).json({ error: error.message })
+  }
+}
 
 const getUser = async (req, res) => {
   const uid = req.params.uid;
@@ -93,5 +115,6 @@ const searchForTrainer = async (req, res) => {
 module.exports = {
   getUser,
   test,
-  searchForTrainer
+  searchForTrainer,
+  bookSession
 };
