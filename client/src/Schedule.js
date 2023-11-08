@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -22,7 +22,7 @@ function Schedule() {
     "Alyssa Bersamin",
     "Bita Tavafoghi"
     ];
-    const times = ["8:00 am - 9:00 am", "9:00 am - 10:00 am", "10:00 am - 11:00 am", "11:00 am - 12:00 pm", "12:00 pm - 1:00 pm", "1:00 pm - 2:00 pm","2:00 pm - 3:00 pm","3:00 pm - 4:00 pm","5:00 pm - 6:00 pm","6:00 pm - 7:00 pm", "7:00 pm - 8:00 pm"];
+    const times = ["8:00am - 9:00am", "9:00am - 10:00am", "10:00am - 11:00am", "11:00am - 12:00pm", "12:00pm - 1:00pm", "1:00pm - 2:00pm","2:00pm - 3:00pm","3:00pm - 4:00pm","4:00pm - 5:00pm", "5:00pm - 6:00pm","6:00pm - 7:00pm", "7:00pm - 8:00pm"];
     const dayOfWeek = ["Monday","Tuesday","Wenesday","Thursday","Friday"];
 
 // State to handle search and filter values
@@ -45,12 +45,43 @@ const [bookedTimeSlots, setBookedTimeSlots] = useState(Array(times.length).fill(
 const [bookedDays, setBookDays] = useState(Array(times.length).fill(''))
 const [timeSlotBookingStatus, setTimeSlotBookingStatus] = useState({});
 
+const [trainerData, setTrainerData] = useState("")
+
+useEffect(() => {
+  getAllTrainers()
+}, [])
+
+const getAllTrainers = async () => {
+
+  console.log("trying to get all trainers")
+
+  fetch("http://localhost:4000/api/user/get-all-trainers", {
+  method: "GET",
+})
+  .then(function(response) {
+    // This right here is the response we will receive before we convert
+    // it over to readable JSON
+    console.log("Response turning to readable JSON", response);
+    return response.json();
+  })
+  .then(function(response) {
+    console.log("success")
+    setTrainerData(JSON.stringify(response))
+    
+
+  })
+  .catch(function(error) {
+    console.log("failure")
+    console.log("Error in async", error);
+  });
+
+}
 
 
 const handleClick = async () => {
     console.log("working");
 
-    fetch("http://localhost:4000/api/user/trainer/"+searchTerm, {
+    fetch("http://localhost:4000/api/user/trainer"+searchTerm, {
     method: "GET",
   })
     .then(function(response) {
@@ -64,7 +95,12 @@ const handleClick = async () => {
       setCurrentTrainerName(response.name)
       setCurrentTrainerPosition(response.Position)
       setCurrentTrainerHomeTown(response.Hometown)
+      
       setCurrentTrainerTimes(response.Times)
+
+
+
+
 
       // When we fetch the data, we also need to set the length of the selectedDayTime array to 10 falses or however many date time combos you have
       let arr = []
@@ -211,6 +247,8 @@ function displayTimes() {
     const timeSlot = time[i];
     const isBooked = currentTrainerTimes[days[i]] == 'booked'; // Check if the time slot is booked
 
+    const dayTime = Object.keys(currentTrainerTimes)[i]
+
     // Define a style object with different styles based on the booking status
     const slotStyle = {
       color: isBooked ? 'red' : 'green', // Red if booked, green if available
@@ -219,6 +257,26 @@ function displayTimes() {
 
     const checkboxColor = isBooked ? "red" : "green";
 
+    let firstSpaceIndex = 0
+    
+    // Find where first space is
+    for (let i = 0; i < dayTime.length; i++)
+    {
+      if (dayTime[i] == " ")
+      {
+        firstSpaceIndex = i
+        break
+      }
+    }
+
+    let day = dayTime.substring(0, firstSpaceIndex)
+    let hours = dayTime.substring(firstSpaceIndex + 1, dayTime.length)
+
+    // Make sure only selected hours shown
+    if (selectedTime != "" && selectedTime != hours)
+    {
+      continue
+    }
 
 
     lines.push(

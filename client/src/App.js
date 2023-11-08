@@ -10,19 +10,19 @@ import Footer from './Footer';
 function App() {
 
   const [message, setMessage] = useState("");
-  useEffect(() => {
-    fetch("http://localhost:4000/api/user/id") // by default fetch will use get
-      .then((res) => res.json())
-      .then((data) => setMessage(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/api/user/id") // by default fetch will use get
+  //     .then((res) => res.json())
+  //     .then((data) => setMessage(data));
+  // }, []);
 
 
   const [trainerName, setName] = useState("");
-  useEffect(() => {
-    fetch("http://localhost:4000/api/user/users")
-      .then((res) => res.json())
-      .then((data) => setName(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/api/user/users")
+  //     .then((res) => res.json())
+  //     .then((data) => setName(data));
+  // }, []);
 
 
 
