@@ -2,13 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-//import BigCalendar from 'react-big-calendar'
-//import "react-big-calendar/lib/css/react-big-calendar.css";
-
-//moment.locale("en-GB");
-//BigCalendar.momentLocalizer(moment);
-
-
 
 
 function Schedule() {
@@ -38,12 +31,9 @@ const [currentTrainerTimes, setCurrentTrainerTimes] = useState("");
 
 const [days, setDays] = useState([]);
 const [time, setTime] = useState([]);
-// const [checkboxes, setCheckboxes] = useState([]);
-const [selectedDayTime, setSelectedDayTime] = useState([]); // Array of bools, where true means they selected that day/time
-const [checked, setChecked] = useState(false);
-const [bookedTimeSlots, setBookedTimeSlots] = useState(Array(times.length).fill(''));
-const [bookedDays, setBookDays] = useState(Array(times.length).fill(''))
-const [timeSlotBookingStatus, setTimeSlotBookingStatus] = useState({});
+const [bookedTimeSlots, setBookedTimeSlots] = useState(Array(times?.length).fill(''));
+const [bookedDays, setBookedDays] = useState(Array(times?.length).fill(''))
+const [checks, setChecks] = useState(Array(times?.length).fill(false))
 
 const [trainerData, setTrainerData] = useState("")
 
@@ -98,16 +88,11 @@ const handleClick = async () => {
       
       setCurrentTrainerTimes(response.Times)
 
-
-
-
-
       // When we fetch the data, we also need to set the length of the selectedDayTime array to 10 falses or however many date time combos you have
       let arr = []
       for (let i = 0; i < days.length; i++) {
         arr.push(false)
       }
-      setSelectedDayTime(arr)
 
       if (response.Times)
       {
@@ -138,19 +123,27 @@ const handleClick2 = async () => {
       setCurrentTrainerHomeTown(data.Hometown);
       setCurrentTrainerTimes(data.Times);
 
+
+
       // When we fetch the data, we also need to set the length of the selectedDayTime array to 10 falses or however many date time combos you have
       let arr = [];
       for (let i = 0; i < days.length; i++) {
         arr.push(false);
       }
-      setSelectedDayTime(arr);
 
       if (data.Times) {
         setDays(Object.keys(data.Times));
         setTime(Object.values(data.Times));
       }
+      
+      // When we get data for a trainer, we reset the selected days/times
+      setBookedDays(Array(times?.length).fill(''))
+      setBookedTimeSlots(Array(times?.length).fill(''))
+      
+      // When we get data for a trainer, we reset all checkboxes to false
+      setChecks(Array(times?.length).fill(false))
 
-      // Add code to show the trainer's information in a popup or modal
+      // Add code to the trainer's information in a popup or modal
       // You can use a library like Material-UI Dialog for this purpose
     } else {
       // Handle the case where no trainer is selected
@@ -206,6 +199,7 @@ const handleCheckSubmit = async () => {
     
     
     if (response.ok) {
+      handleClick2();
       console.log("Booking successful!");
     } else {
       console.error("Booking failed.");
@@ -218,36 +212,47 @@ const handleCheckSubmit = async () => {
 
 // Accepts index which will be used to set true on selectedDayTime
 // handle change when button pressed accepts an int
-// 
-
-// function handleCheck(i) // this int is the index of the checkbox
-// {
-//   // let arr = selectedDayTime
-//   // arr[i] = true;
-//   // setSelectedDayTime(arr)
-//   const updatedSelectedDayTime = [...selectedDayTime];
-//   updatedSelectedDayTime[i] = true;
-//   setSelectedDayTime(updatedSelectedDayTime);
-
-// }
 
 function handleCheck(i,days) {
   const updatedBookedTimeSlots = [...bookedTimeSlots];
   updatedBookedTimeSlots[i] = !updatedBookedTimeSlots[i];
   setBookedTimeSlots(updatedBookedTimeSlots);
   
-  setBookDays([...bookedDays, days]);
+  // Update booleans inside check arr
+  let checkArr = checks
+  checkArr[i] = !checkArr[i]
+  setChecks(checkArr)
+
+  setBookedDays([...bookedDays, days]);
 }
 
 
 function displayTimes() {
   let lines = [];
 
-  for (let i = 0; i < days.length; i++) {
+  // Dont display times until the data is loaded in
+  if (days == undefined || currentTrainerTimes == undefined)
+  {
+    return
+  }
+
+  for (let i = 0; i < days?.length; i++) {
     const timeSlot = time[i];
     const isBooked = currentTrainerTimes[days[i]] == 'booked'; // Check if the time slot is booked
 
+    // Dont display times until the data is loaded in
+    if (currentTrainerTimes?.length == 0)
+    {
+      return;
+    }
+
     const dayTime = Object.keys(currentTrainerTimes)[i]
+
+    // Dont display times until the data is loaded in
+    if (dayTime == undefined)
+    {
+      return
+    }
 
     // Define a style object with different styles based on the booking status
     const slotStyle = {
@@ -260,7 +265,7 @@ function displayTimes() {
     let firstSpaceIndex = 0
     
     // Find where first space is
-    for (let i = 0; i < dayTime.length; i++)
+    for (let i = 0; i < dayTime?.length; i++)
     {
       if (dayTime[i] == " ")
       {
@@ -270,7 +275,7 @@ function displayTimes() {
     }
 
     let day = dayTime.substring(0, firstSpaceIndex)
-    let hours = dayTime.substring(firstSpaceIndex + 1, dayTime.length)
+    let hours = dayTime.substring(firstSpaceIndex + 1, dayTime?.length)
 
     // Make sure only selected hours shown
     if (selectedTime != "" && selectedTime != hours)
@@ -283,7 +288,7 @@ function displayTimes() {
       <div style={slotStyle}>
         <b>{days[i]}</b>: {timeSlot}
         <Checkbox
-        //checked={isBooked}
+        checked={checks[i]}
           onChange={() => handleCheck(i, days[i])}
           inputProps={{ 'aria-label': 'controlled' }}
           color="success"
@@ -295,30 +300,7 @@ function displayTimes() {
 
   return lines;
 }
-// function displayTimes() {
-//   let lines = [];
 
-//   for (let i = 0; i < days.length; i++) {
-//     const timeSlot = days[i];
-//     const isBooked = timeSlotBookingStatus[timeSlot] === 'booked'; // Check the booking status
-
-//     lines.push(
-//       <div>
-//         <b>{timeSlot}</b> : {time[i]}
-//         <Checkbox
-//           onChange={() => handleCheck(i, timeSlot)}
-//           inputProps={{ 'aria-label': 'controlled' }}
-//           style={{ color: isBooked ? 'red' : 'green' }} // Set the color based on booking status
-//         />
-//       </div>
-//     );
-//   }
-
-//   return lines;
-// }
-
-
- 
 return (
   <div>
     <div className = "schedule">
@@ -356,7 +338,6 @@ return (
       <button onClick={handleClick2}>Submit</button>
       
       {/* Placeholder for schedule content */}
-      <p>*Insert schedule feature here*</p>
       {currentTrainerName != "" && 
         <div style={{ textAlign: 'left' }}>
           <h3>Trainer: {currentTrainerName}</h3>
@@ -366,13 +347,11 @@ return (
           <button onClick={handleCheckSubmit}>Submit</button>
         </div>
       }
-      <h2>Test</h2>
+
 
     </div>
   <Footer />
 </div>
 );
 }
-
-
 export default Schedule;   
