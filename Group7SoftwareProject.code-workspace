@@ -9,5 +9,7 @@
 			"path": "../SWE Project /example_code"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Group7SoftwareProject"
+	}
 }

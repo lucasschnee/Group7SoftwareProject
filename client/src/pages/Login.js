@@ -22,6 +22,14 @@ const Login = () => {
     const navigate = useNavigate()
 
     const LoginWithFirebase = async () => {
+        //case insensitive for later 
+        // if (email.slice(-14) != "vanderbilt.edu")
+        // {
+        //     // maybe put error, only for candy students
+        //     return
+        // }
+        
+        
         //setTimeout(function () {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {

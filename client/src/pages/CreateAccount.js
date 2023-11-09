@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import './CreateAccount.css'
 
+
 const CreateAccount = () => {
+
 
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
@@ -16,39 +18,52 @@ const CreateAccount = () => {
     const navigate = useNavigate()
 
     const auth = getAuth();
-
+    
     function CreateWithFirebase()
     {
         // When you call createUserWithEmailAndPassword, pass in email and password states above
 
-
+       // console.log("Email:", email); // Debug statement to log email value
+        
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+            
             // Signed up 
             const user = userCredential.user;
             // ...
-            // redirect to about page using navigate
+       
+            if (email.endsWith("@vanderbilt.edu")) {
+                // user.sendEmailVerification()
+                //     .then(() => {
+                //         console.log("Verification email sent.");
+                //         // Display a message informing the user to check their email for verification.
+                //     })
+                //     .catch((error) => {
+                //         console.error("Error sending verification email: ", error);
+                //     }); //the email stuff is getting messed up
+                setCreatedSuccessfully(true);
+                
+                setTimeout(() => {
+                    
+                    navigate("/about");
+                }, 1000); // Delay for 1 second (1000 milliseconds)
+                //now make it say log out on the nav bar
+            } else {
+                console.log("Please use a Vanderbilt email.");
+                setCreateFailed(true);
 
-            setCreatedSuccessfully(true)
-
-            // Add code to wait a second!
-
-            // redirect to landing page using navigate
-            navigate("/about")
+            }
+            
             
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            setCreateFailed(false)
+            setCreateFailed(true)
             // ..
         });
 
     }
-        
-
-    
-    
 
 
     return (
@@ -62,10 +77,11 @@ const CreateAccount = () => {
                     id="outlined-controlled"
                     label="Email"
                     value={email}
-                    onChange={(event) => {
+                    onChange={(event) => { {/* only vandebrilt */}
                         setEmail(event.target.value);
                     }}
                 />
+                {/* only vandebrilt */}
 
             {/* { Text Field for email */}
 
@@ -95,10 +111,20 @@ const CreateAccount = () => {
 
             {createdSuccessfully && 
                 <h3>
-                    Created Account SuccessfullY!
+                    Created Account Successfully!
                 </h3>
             }
-            {createFailed && 
+            {/* {createFailed && 
+                <h3>
+                    Failed to create account
+                </h3>
+            } */}
+            {createFailed && !email.endsWith("vanderbilt.edu") && 
+            <h3>
+                Please use a Vanderbilt email
+            </h3>
+            }
+            {createFailed && email.endsWith("vanderbilt.edu") && 
                 <h3>
                     Failed to create account
                 </h3>

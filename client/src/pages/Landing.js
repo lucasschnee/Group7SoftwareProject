@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
 const Landing = () => {
 
-    navigate = useNavigate()
+    const navigate = useNavigate()
+
+
 
     return (
         <div>
@@ -16,7 +19,14 @@ const Landing = () => {
             <p>Join us today.</p>
             <div>
             {/* Should redirect to the CreateAccount page */}
-            <button class="signup-button" onClick={navigate("/create-account")}>SIGN UP </button> 
+            
+            {/* <nav>
+                <ul>
+                    <li><Link to="/create-account">SIGN UP</Link></li>
+                
+                </ul>
+            </nav> */}
+            {/* <button class="signup-button" onClick={console.log("BUTTON CLICKED")}>SIGN UP </button>  */}
             
             </div>
             </div>

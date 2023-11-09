@@ -66,11 +66,36 @@ function App() {
 
     
     <Routes>
-      <Route path="/" element={<Header><Landing/></Header>} />
-      <Route path="/about" element={<Header><About /></Header>} />
-      <Route path="/trainers" element={<Header><Trainers/></Header>} />
-      <Route path="/schedule" element={<Header><Schedule/></Header>} />
-      <Route path="/discussion" element={<Header><Discussion/></Header>} />
+      <Route path="/" element={
+      <div>
+        <Header/>
+        <Landing/>
+      </div>} />
+      
+      <Route path="/about" element={
+      <div>
+        <Header/>
+        <About/>
+      </div>} />
+
+      <Route path="/trainers" element={
+      <div>
+        <Header/>
+        <Trainers/>
+      </div>} />
+      
+      <Route path="/schedule" element={
+      <div>
+        <Header/>
+        <Schedule/>
+      </div>} />
+      
+      <Route path="/discussion" element={
+      <div>
+        <Header/>
+        <Discussion/>
+      </div>} />
+      
       <Route path="/login" element={<Login/>} />
       <Route path="/create-account" element={<CreateAccount/>} />
     </Routes>
