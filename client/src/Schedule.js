@@ -339,7 +339,7 @@ return (
       
       {/* Placeholder for schedule content */}
       {currentTrainerName != "" && 
-        <div style={{ textAlign: 'left' }}>
+        <div style={{ textAlign: 'left'}}>
           <h3>Trainer: {currentTrainerName}</h3>
           <h3>Hometown: {currentTrainerHomeTown}</h3>
           <h3>Position: {currentTrainerPosition}</h3>
