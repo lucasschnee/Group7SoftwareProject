@@ -320,3 +320,6 @@ body::after {
   margin-bottom: 8px;
   }
   
+  .whiteText {
+    color: white;
+  }

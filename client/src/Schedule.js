@@ -148,6 +148,7 @@ const handleClick2 = async () => {
     } else {
       // Handle the case where no trainer is selected
       console.warn("Please select a trainer before clicking submit.");
+      
     }
 
   } catch (error) {
@@ -283,6 +284,11 @@ function displayTimes() {
       continue
     }
 
+    // Make sure only selected hours shown
+    if (selectedDayOfWeek != "" && selectedDayOfWeek != day)
+    {
+      continue
+    }
 
     lines.push(
       <div style={slotStyle}>
@@ -331,7 +337,7 @@ return (
       <button onClick={handleClick2}>Submit</button>
 
       {/* Day of Week filter dropdown */}
-      <select value={selectedTime} onChange={(e) => setSelectedDayOfWeek(e.target.value)}>
+      <select value={selectedDayOfWeek} onChange={(e) => setSelectedDayOfWeek(e.target.value)}>
         <option value=''>Filter by Day</option>
         {dayOfWeek.map(dayOfWeek => <option key={dayOfWeek} value={dayOfWeek}>{dayOfWeek}</option>)}
       </select>
@@ -347,7 +353,11 @@ return (
           <button onClick={handleCheckSubmit}>Submit</button>
         </div>
       }
-
+    <div > 
+      <h3 className="whiteText">
+        Select a trainer and click submit to see their availability. 
+      </h3>
+    </div>
 
     </div>
   <Footer />
