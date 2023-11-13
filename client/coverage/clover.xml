@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699908227363" clover="3.2.0">
-  <project timestamp="1699908227363" name="All files">
-    <metrics statements="220" coveredstatements="47" conditionals="44" coveredconditionals="8" methods="63" coveredmethods="18" elements="327" coveredelements="73" complexity="0" loc="220" ncloc="220" packages="3" files="13" classes="13"/>
+<coverage generated="1699908534043" clover="3.2.0">
+  <project timestamp="1699908534043" name="All files">
+    <metrics statements="220" coveredstatements="48" conditionals="44" coveredconditionals="8" methods="63" coveredmethods="18" elements="327" coveredelements="74" complexity="0" loc="220" ncloc="220" packages="3" files="13" classes="13"/>
     <package name="src">
-      <metrics statements="158" coveredstatements="11" conditionals="30" coveredconditionals="0" methods="38" coveredmethods="4"/>
+      <metrics statements="158" coveredstatements="12" conditionals="30" coveredconditionals="0" methods="38" coveredmethods="4"/>
       <file name="About.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/About.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="6" count="1" type="stmt"/>
       </file>
       <file name="App.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/App.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="44" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
         <line num="50" count="2" type="stmt"/>
       </file>
       <file name="Discussion.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/Discussion.js">
@@ -183,15 +183,15 @@
         <line num="29" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/index.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components">
       <metrics statements="12" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="3"/>
       <file name="Header.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/components/Header.js">
         <metrics statements="12" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="3"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -209,7 +209,7 @@
       <metrics statements="50" coveredstatements="28" conditionals="14" coveredconditionals="8" methods="18" coveredmethods="11"/>
       <file name="CreateAccount.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/pages/CreateAccount.js">
         <metrics statements="22" coveredstatements="20" conditionals="10" coveredconditionals="8" methods="8" coveredmethods="8"/>
-        <line num="10" count="3" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
         <line num="13" count="15" type="stmt"/>
         <line num="14" count="15" type="stmt"/>
         <line num="15" count="15" type="stmt"/>
@@ -234,14 +234,14 @@
       </file>
       <file name="Landing.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/pages/Landing.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="4" count="3" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
         <line num="6" count="6" type="stmt"/>
         <line num="11" count="5" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
       </file>
       <file name="Login.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/pages/Login.js">
         <metrics statements="21" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
@@ -265,7 +265,7 @@
       </file>
       <file name="Profile.js" path="/Users/lucasschnee/Desktop/Group7SoftwareProject/client/src/pages/Profile.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="8" count="2" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
         <line num="10" count="5" type="stmt"/>
         <line num="16" count="5" type="stmt"/>
       </file>
