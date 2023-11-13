@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Group7SoftwareProject/static/css/main.61e372b8.css",
-    "main.js": "/Group7SoftwareProject/static/js/main.d7b8b75d.js",
+    "main.css": "/Group7SoftwareProject/static/css/main.fb6ed386.css",
+    "main.js": "/Group7SoftwareProject/static/js/main.0aaeb3fb.js",
     "static/media/man_lifting1.png": "/Group7SoftwareProject/static/media/man_lifting1.6491ad7fd123a412f2dd.png",
     "index.html": "/Group7SoftwareProject/index.html",
-    "main.61e372b8.css.map": "/Group7SoftwareProject/static/css/main.61e372b8.css.map",
-    "main.d7b8b75d.js.map": "/Group7SoftwareProject/static/js/main.d7b8b75d.js.map"
+    "main.fb6ed386.css.map": "/Group7SoftwareProject/static/css/main.fb6ed386.css.map",
+    "main.0aaeb3fb.js.map": "/Group7SoftwareProject/static/js/main.0aaeb3fb.js.map"
   },
   "entrypoints": [
-    "static/css/main.61e372b8.css",
-    "static/js/main.d7b8b75d.js"
+    "static/css/main.fb6ed386.css",
+    "static/js/main.0aaeb3fb.js"
   ]
 }
