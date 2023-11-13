@@ -15,7 +15,7 @@
   "bugs": {
     "url": "git+https://github.com/lucasschnee/Group7SoftwareProject/issues"
   },
-  "homepage": "https://github.com/lucasschnee/Group7SoftwareProject#readme",
+  "homepage": ".",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
