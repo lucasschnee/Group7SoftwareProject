@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.67d45dac.css",
-    "main.js": "/static/js/main.5284c596.js",
-    "static/media/man_lifting1.png": "/static/media/man_lifting1.6491ad7fd123a412f2dd.png",
-    "index.html": "/index.html",
-    "main.67d45dac.css.map": "/static/css/main.67d45dac.css.map",
-    "main.5284c596.js.map": "/static/js/main.5284c596.js.map"
+    "main.css": "/Group7SoftwareProject/static/css/main.572f85df.css",
+    "main.js": "/Group7SoftwareProject/static/js/main.db414d99.js",
+    "static/media/man_lifting1.png": "/Group7SoftwareProject/static/media/man_lifting1.6491ad7fd123a412f2dd.png",
+    "index.html": "/Group7SoftwareProject/index.html",
+    "main.572f85df.css.map": "/Group7SoftwareProject/static/css/main.572f85df.css.map",
+    "main.db414d99.js.map": "/Group7SoftwareProject/static/js/main.db414d99.js.map"
   },
   "entrypoints": [
-    "static/css/main.67d45dac.css",
-    "static/js/main.5284c596.js"
+    "static/css/main.572f85df.css",
+    "static/js/main.db414d99.js"
   ]
 }
