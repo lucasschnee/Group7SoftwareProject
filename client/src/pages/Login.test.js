@@ -56,5 +56,5 @@ describe('Login Component', () => {
       expect(screen.getByText('Could not login. Try again.')).toBeInTheDocument();
     });
   });
+});
 
-  // Additional tests for edge cases and error scenarios

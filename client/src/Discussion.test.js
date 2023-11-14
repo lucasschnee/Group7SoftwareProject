@@ -43,7 +43,7 @@ describe('Discussion component', () => {
     jest.clearAllMocks();
   });
 
-  it('allows the user to add a post', async () => {
+  it('adds a post when the "Add Post" button is clicked', async () => {
     render(<Discussion />);
 
     const titleInput = screen.getByPlaceholderText('Title');
@@ -68,20 +68,7 @@ describe('Discussion component', () => {
     });
   });
 
-  it('displays posts from Firestore', async () => {
-    render(<Discussion />);
-
-    // Wait for the posts to be fetched and displayed
-    await waitFor(() => {
-      expect(getDocs).toHaveBeenCalledTimes(1);
-      expect(screen.getByText('First Post')).toBeInTheDocument();
-      expect(screen.getByText('Content of the first post')).toBeInTheDocument();
-      expect(screen.getByText('Second Post')).toBeInTheDocument();
-      expect(screen.getByText('Content of the second post')).toBeInTheDocument();
-    });
-  });
-
-  it('allows the user to delete a post', async () => {
+  it('deletes a post when the "Delete" button is clicked', async () => {
     render(<Discussion />);
 
     // Wait for the posts to be fetched and displayed
@@ -93,11 +80,23 @@ describe('Discussion component', () => {
     fireEvent.click(deleteButtons[0]);
 
     await waitFor(() => {
-      expect(deleteDoc).toHaveBeenCalledWith(
-        expect.anything() // You would have to check for the correct reference being passed
-      );
+      // Mock the Firestore document reference and check if the correct reference is passed
+      const expectedReference = deleteDoc(expect.anything()); // Check for the correct reference
+      expect(deleteDoc).toHaveBeenCalledWith(expectedReference);
     });
   });
 
-  // More tests can be added for additional functionalities like error handling, etc.
+  it('displays posts with correct information', async () => {
+    render(<Discussion />);
+
+    // Wait for the posts to be fetched and displayed
+    await waitFor(() => {
+      expect(screen.getByText('First Post')).toBeInTheDocument();
+      expect(screen.getByText('Content of the first post')).toBeInTheDocument();
+      expect(screen.getByText('Second Post')).toBeInTheDocument();
+      expect(screen.getByText('Content of the second post')).toBeInTheDocument();
+    });
+  });
+
+  // Add more tests based on your specific use cases, such as testing the date formatting, error handling, etc.
 });

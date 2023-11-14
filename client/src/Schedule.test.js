@@ -1,74 +1,189 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Schedule from './Schedule';
 
-// Mocking modules and methods
-jest.mock('./Footer', () => () => <footer>Mocked Footer</footer>);
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ /* Mock response data */ }),
-  }),
-);
+// Mocking the fetch function
+global.fetch = jest.fn();
 
-beforeEach(() => {
-  fetch.mockClear();
-});
-
-describe('Schedule Component', () => {
-  it('renders the component correctly', () => {
-    render(<Schedule />);
-    expect(screen.getByText(/Schedule a Session/i)).toBeInTheDocument();
-    // Assertions for initial state of dropdowns and inputs
-  });
-
-  it('handles input change for search bar', () => {
-    render(<Schedule />);
-    const inputElement = screen.getByPlaceholderText('Search...');
-    fireEvent.change(inputElement, { target: { value: 'New Search Term' } });
-    expect(inputElement.value).toBe('New Search Term');
-  });
-
-  // Test for dropdown selections and their effect on the state
-  // Repeat for each dropdown: Trainer, Time, Day of Week
-
-  it('handles button click for search submit', async () => {
-    render(<Schedule />);
-    const buttonElement = screen.getByText('Submit');
-    fireEvent.click(buttonElement);
-    await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith(/* Expected URL and options */);
-      // Assertions for expected state updates
+describe('Schedule component', () => {
+  it('fetches and displays trainer information', async () => {
+    // Mock the fetch calls
+    fetch.mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValueOnce({
+        name: 'Test Trainer',
+        Position: 'Fitness Trainer',
+        Hometown: 'Test Town',
+        Times: {
+          Monday: 'available',
+          Tuesday: 'booked',
+        },
+      }),
     });
+
+    render(
+      <Router>
+        <Schedule />
+      </Router>
+    );
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    // Assert that the fetched data is displayed correctly in the component
+    expect(screen.getByText('Test Trainer')).toBeInTheDocument();
+    expect(screen.getByText('Fitness Trainer')).toBeInTheDocument();
+    expect(screen.getByText('Test Town')).toBeInTheDocument();
+    expect(screen.getByText('Monday: available')).toBeInTheDocument();
+    expect(screen.getByText('Tuesday: booked')).toBeInTheDocument();
   });
 
-  // Repeat similar tests for other button clicks like handleClick2
+  it('filters trainers by search term', async () => {
+    // Mock the fetch calls
+    fetch.mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValueOnce({
+        name: 'Test Trainer',
+        Position: 'Fitness Trainer',
+        Hometown: 'Test Town',
+        Times: {
+          Monday: 'available',
+        },
+      }),
+    });
 
-  it('handles checkbox interactions correctly', () => {
-    // Render component and simulate checkbox interactions
-    // Assertions to check if the state updates correctly for checkboxes
+    render(
+      <Router>
+        <Schedule />
+      </Router>
+    );
+
+    // Simulate user typing in the search bar
+    userEvent.type(screen.getByPlaceholderText('Search...'), 'Test Trainer');
+    userEvent.click(screen.getByText('Submit'));
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    // Assert that the fetched data is displayed correctly in the component
+    expect(screen.getByText('Test Trainer')).toBeInTheDocument();
   });
 
-  // Conditional rendering tests
-  it('conditionally renders trainer details', () => {
-    render(<Schedule />);
-    // Interact with the component to update state
-    // Assertions to check if trainer details are rendered based on state
+
+  it('submits the booking successfully', async () => {
+    // Mock the fetch calls
+    fetch.mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValueOnce({
+        name: 'Test Trainer',
+        Position: 'Fitness Trainer',
+        Hometown: 'Test Town',
+        Times: {
+          Monday: 'available',
+        },
+      }),
+    });
+
+    render(
+      <Router>
+        <Schedule />
+      </Router>
+    );
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    // Simulate user interactions to trigger a booking
+    userEvent.click(screen.getByText('Monday: available'));
+    userEvent.click(screen.getByText('Submit'));
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(2);
+    });
+
+    // Assert that the booking was successful
+    expect(screen.getByText('Booking successful!')).toBeInTheDocument();
   });
 
-  it('displays times correctly based on state', () => {
-    render(<Schedule />);
-    // Interact with component to update state relevant for displayTimes
-    // Assertions to check if times are rendered correctly
+  it('displays message when no trainers are found', async () => {
+    // Mock the fetch calls to return an empty array
+    fetch.mockResolvedValueOnce({ json: jest.fn().mockResolvedValueOnce([]) });
+
+    render(
+      <Router>
+        <Schedule />
+      </Router>
+    );
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    // Assert that the "No trainers found" message is displayed
+    expect(screen.getByText('No trainers found.')).toBeInTheDocument();
   });
 
-  // Network error handling
-  it('handles network errors gracefully', async () => {
-    fetch.mockImplementationOnce(() => Promise.reject(new Error('Network error')));
-    render(<Schedule />);
-    // Trigger a network request
-    // Assertions to check how the component handles the error
+  it('handles error during trainer fetch', async () => {
+    // Mock the fetch calls to reject with an error
+    fetch.mockRejectedValueOnce(new Error('Fetch error'));
+
+    render(
+      <Router>
+        <Schedule />
+      </Router>
+    );
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    // Assert that an error message is displayed
+    expect(screen.getByText('Error fetching trainers. Please try again.')).toBeInTheDocument();
   });
 
-  // Additional tests for other specific logic in your component
+  it('handles error during booking submission', async () => {
+    // Mock the fetch calls to return trainer data and reject during booking submission
+    fetch.mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValueOnce({
+        name: 'Test Trainer',
+        Position: 'Fitness Trainer',
+        Hometown: 'Test Town',
+        Times: {
+          Monday: 'available',
+        },
+      }),
+    });
+    fetch.mockRejectedValueOnce(new Error('Booking error'));
+
+    render(
+      <Router>
+        <Schedule />
+      </Router>
+    );
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    // Simulate user interactions to trigger a booking
+    userEvent.click(screen.getByText('Monday: available'));
+    userEvent.click(screen.getByText('Submit'));
+
+    // Wait for the fetch calls to resolve
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(2);
+    });
+
+    // Assert that the error message is displayed
+    expect(screen.getByText('Booking failed. Please try again.')).toBeInTheDocument();
+  });
 });
