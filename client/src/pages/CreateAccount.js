@@ -114,11 +114,6 @@ const CreateAccount = () => {
                     Created Account Successfully!
                 </h3>
             }
-            {/* {createFailed && 
-                <h3>
-                    Failed to create account
-                </h3>
-            } */}
             {createFailed && !email.endsWith("vanderbilt.edu") && 
             <h3>
                 Please use a Vanderbilt email

@@ -7,8 +7,10 @@ const Landing = () => {
 
 
 
+
     return (
         <div>
+            <div>
             <div className="welcome">
             <h2>Welcome</h2></div>
             <div className="welcome-message">
@@ -18,16 +20,8 @@ const Landing = () => {
             <div className="join">
             <p>Join us today.</p>
             <div>
-            {/* Should redirect to the CreateAccount page */}
-            
-            {/* <nav>
-                <ul>
-                    <li><Link to="/create-account">SIGN UP</Link></li>
-                
-                </ul>
-            </nav> */}
-            {/* <button class="signup-button" onClick={console.log("BUTTON CLICKED")}>SIGN UP </button>  */}
-            
+            <button onClick={() => {navigate("/create-account")}} class="signup-button">SIGN UP</button>
+            </div>
             </div>
             </div>
         </div>

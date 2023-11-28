@@ -5,6 +5,7 @@ import Trainers from './Trainers';
 import Schedule from './Schedule';
 import Discussion from './Discussion';
 import Landing from './pages/Landing';
+import Profile from './pages/Profile';
 import Login from './pages/Login';
 import CreateAccount from "./pages/CreateAccount";
 import Header from "./components/Header"
@@ -16,6 +17,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import Footer from './Footer';
 
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
 
@@ -41,25 +43,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
+export const db = getFirestore(app);
 
 function App() {
-
-
-  // function accessFirebase()
-  // {
-  //   const app = firebase.initializeApp(firebaseConfig)
-
-  //   const firestore = app.firestore(); // Export Firestore if you are using it
-  //   const auth = app.acouth();
-  //   const db = app.firestore()
-  //   const User = db.collection('Users')
-  // }
-
-  // accessFirebase();
-
-  // PUT THESE MESSAGES BELOW TO DISPLAY THE STUFF IN DB
-  
-  //<h1>{trainerName}</h1> 
 
   return (
   <Router>
@@ -96,6 +82,12 @@ function App() {
         <Discussion/>
       </div>} />
       
+      <Route path="/profile" element={
+      <div>
+        <Header/>
+        <Profile/>
+      </div>} />
+
       <Route path="/login" element={<Login/>} />
       <Route path="/create-account" element={<CreateAccount/>} />
     </Routes>

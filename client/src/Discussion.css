@@ -1,0 +1,86 @@
+.discussion-container {
+  max-width: 800px; 
+  margin: auto;
+}
+
+.discussion-board {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-title, .input-content {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; 
+  border-radius: 4px;
+}
+
+.input-content {
+  height: 100px; 
+}
+
+.btn-add-post {
+  background-color: #444; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-post:hover {
+  background-color: #555; 
+}
+
+.announcements {
+  margin-top: 20px;
+}
+
+.announcement {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.date-posted {
+  font-size: 0.85rem;
+  color: #666; 
+}
+
+.announcement-content {
+  text-align: left;
+}
+
+.btn-delete-post {
+  background-color: #ff4c4c; 
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-end; 
+  margin-top: 10px;
+}
+
+.btn-delete-post:hover {
+  background-color: #ff5e5e;
+}

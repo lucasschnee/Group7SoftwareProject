@@ -2,6 +2,9 @@ const firebase = require("firebase/app");
 const express = require('express');
 
 const userRoutes = require('./routes/userRoutes')
+const cors = require('cors');
+
+// Your server routes and logic
 
 const PORT = 4000
 
@@ -22,24 +25,23 @@ firebase.initializeApp(firebaseConfig);
 // create express app
 const app = express()
 
+app.use(cors());
+
 // checks if request has body data (e.g. post, patch)
 // if it does, passes that data to req object
 app.use(express.json())
 
 // will run every time a request comes in, simply logs for debug
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin","*");
+  res.header("Access-Control-Allow-Origin","*");
   console.log('connected to path:', req.path, 'with method:', req.method)
   next()
 })
 
 app.get("/message", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
-
-
-
-
+    res.json({ message: "Hello from server!" });
+  });
+  
 
 // if we get a request from that page
 app.use('/api/user', userRoutes);
