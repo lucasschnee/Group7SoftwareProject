@@ -45,7 +45,7 @@ function Trainers() {
     <div className="trainer">
     <h3>Sarah Buonnano</h3>
     <p>Position: Head Coordinator</p>
-    <p>Hometown: Boulder, Colorado</p>
+    <p>Hometown: Charlotte, North Carolina</p>
     <p>Quote: "After 16 years of dancing recreationally and competitively, i transitioned into the fitness world and developed a love for lifting, running, and pilates that has held strong for the past 3 years. I aspire to help others (especially women) build strength and confidence both physically and mentally."</p>
     </div>
     
