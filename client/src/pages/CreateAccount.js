@@ -5,12 +5,14 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import './CreateAccount.css'
+import { updateProfile } from "firebase/auth";
 
 
 const CreateAccount = () => {
 
 
     const [email, setEmail] = React.useState("")
+    const [name, setName] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [createdSuccessfully, setCreatedSuccessfully] = React.useState(false)
     const [createFailed, setCreateFailed] = React.useState(false)
@@ -45,6 +47,10 @@ const CreateAccount = () => {
                 
                 setTimeout(() => {
                     
+                    updateProfile(auth.currentUser, {
+                        displayName: name
+                      })
+
                     navigate("/about");
                 }, 1000); // Delay for 1 second (1000 milliseconds)
                 //now make it say log out on the nav bar
@@ -79,6 +85,18 @@ const CreateAccount = () => {
                     value={email}
                     onChange={(event) => { {/* only vandebrilt */}
                         setEmail(event.target.value);
+                    }}
+                />
+
+                <TextField
+                    sx={{
+                        backgroundColor:'white'
+                    }}
+                    id="outlined-controlled"
+                    label="Name"
+                    value={name}
+                    onChange={(event) => { {/* only vandebrilt */}
+                        setName(event.target.value);
                     }}
                 />
                 {/* only vandebrilt */}

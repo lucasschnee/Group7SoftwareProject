@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.67d45dac.css",
-    "main.js": "/static/js/main.d034351b.js",
+    "main.css": "/static/css/main.5353efd6.css",
+    "main.js": "/static/js/main.8fd1879a.js",
     "static/media/man_lifting1.png": "/static/media/man_lifting1.6491ad7fd123a412f2dd.png",
     "index.html": "/index.html",
-    "main.67d45dac.css.map": "/static/css/main.67d45dac.css.map",
-    "main.d034351b.js.map": "/static/js/main.d034351b.js.map"
+    "main.5353efd6.css.map": "/static/css/main.5353efd6.css.map",
+    "main.8fd1879a.js.map": "/static/js/main.8fd1879a.js.map"
   },
   "entrypoints": [
-    "static/css/main.67d45dac.css",
-    "static/js/main.d034351b.js"
+    "static/css/main.5353efd6.css",
+    "static/js/main.8fd1879a.js"
   ]
 }
