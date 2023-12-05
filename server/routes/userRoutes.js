@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getUser, test, searchForTrainer, bookSession, getAllTrainers
+  getUser, test, searchForTrainer, bookSession, getAllTrainers //testSearchForUser //searchForUser
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -14,6 +14,10 @@ router.put('/test', test);
 router.get('/get-all-trainers', getAllTrainers);
 
 router.get('/trainer/:trainerName', searchForTrainer);
+
+//router.get('/users/:userID', searchForUser); //new
+
+//router.get('/hello', testSearchForUser); //new
 
 
 

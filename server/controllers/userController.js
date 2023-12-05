@@ -1,5 +1,7 @@
 const { json } = require("express");
 const firebase = require("firebase/database");
+//import { push } from 'firebase/database';
+
 
 
 
@@ -18,7 +20,7 @@ const test = async (req, res) => {
 
 const bookSession = async (req, res) => {
   console.log(req.body);
-  const { trainerName, timeSlots, arrayOfDays } = req.body; 
+  const { trainerName, timeSlots, arrayOfDays, userID, userEmail } = req.body; 
 
   // update the user's instruments
   try {
@@ -27,8 +29,23 @@ const bookSession = async (req, res) => {
     for (i = 0; i < arrayOfDays.length; i++){
       if(arrayOfDays[i] != ""){
 
-        await firebase.set(firebase.ref(db, `/trainers/` + trainerName.replace(/\s+/g, '') + `/Times/` + arrayOfDays[i]), "booked")
+       //console.log(userID)
 
+        await firebase.set(firebase.ref(db, `/trainers/` + trainerName.replace(/\s+/g, '') + `/Times/` + arrayOfDays[i]), userEmail.split('.')[0])
+        
+        const ID = await firebase.push(firebase.ref(db, `/users/` + userID + `/sessions/`), {day: arrayOfDays[i],trainer: trainerName})
+        //console.log("this :", ID)
+        //await firebase.set(firebase.ref(db, `/users/` + userID + `/sessions/` ), {day: arrayOfDays[i]})
+        
+        
+        //let path = firebase.ref(db, `/users/`)
+        //await firebase.push(path, {ID: userID})
+
+
+        //const usersRef = firebase.ref(db, '/users/');
+        // const newUserRef = firebase.push(usersRef);
+        //await firebase.set(newUserRef, userID);
+        //await firebase.push(firebase.ref(db,`/users/` + userID),"booked")
       }
     }
     
@@ -85,8 +102,56 @@ const searchForTrainer = async (req, res) => {
   }
 }
 
-const getAllTrainers = async (req, res) => {
+// const testSearchForUser = async (req, res) => {
+//   console.log("hi");
+//   // let userID = req.params.userID;
 
+//     // // fetch from the 
+    
+//     // try {
+//     //   const dbRef = firebase.ref(firebase.getDatabase());
+//     //   console.log(`users/${userID}`)
+//     //   firebase.get(firebase.child(dbRef, `users/${userID}`)).then((snapshot) => {
+//     //     if (snapshot.exists()) {
+//     //       console.log("hello1234", snapshot.val());
+//     //       return res.status(200).json(snapshot.val());
+//     //     } else {
+//     //       console.log("No data available (search for trainer)");
+//     //     }
+//     //   }).catch((error) => {
+//     //     console.error(error);
+//     //   });
+//     // } catch (error) {
+//     //   res.status(400).json({ error: error.message })
+//     // }
+//   }
+
+// const searchForUser = async (req, res) => {
+//   let userID = req.params.userID;
+  
+
+//   // fetch from the 
+  
+//   try {
+//     const dbRef = firebase.ref(firebase.getDatabase());
+//     console.log(`users/${userID}`)
+//     firebase.get(firebase.child(dbRef, `users/${userID}`)).then((snapshot) => {
+//       if (snapshot.exists()) {
+//         console.log("hello1234", snapshot.val());
+//         return res.status(200).json(snapshot.val());
+//       } else {
+//         console.log("No data available (search for trainer)");
+//       }
+//     }).catch((error) => {
+//       console.error(error);
+//     });
+//   } catch (error) {
+//     res.status(400).json({ error: error.message })
+//   }
+// }
+
+const getAllTrainers = async (req, res) => {
+ // console.log("hello2")
   try {
     const dbRef = firebase.ref(firebase.getDatabase());
     firebase.get(firebase.child(dbRef, "trainers")).then((snapshot) => {
@@ -103,6 +168,7 @@ const getAllTrainers = async (req, res) => {
     res.status(400).json({ error: error.message })
   }
 }
+
 
 
 // const searchForTrainer = async (req, res) => {
@@ -137,6 +203,8 @@ module.exports = {
   getUser,
   test,
   searchForTrainer,
+ //searchForUser,
+  //testSearchForUser,
   bookSession,
   getAllTrainers
 };
