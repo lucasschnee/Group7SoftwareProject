@@ -101,10 +101,13 @@ function Schedule() {
         const data2 = await resp.json();
         setCurrentTrainerName(data2.name);
         setCurrentTrainerTimes(data2.Times);
+        console.log(user.uid);
         const data = {
             trainerName: currentTrainerName,
             timeSlots: bookedTimeSlots,
-            arrayOfDays: bookedDays
+            arrayOfDays: bookedDays,
+            userID:user.uid,
+            userEmail:user.email
         };
         const response = await fetch("http://localhost:4000/api/user/bookings", {
             method: "POST",
@@ -138,7 +141,7 @@ function Schedule() {
         }
         for (let i = 0; i < days?.length; i++) {
             const timeSlot = time[i];
-            const isBooked = currentTrainerTimes[days[i]] === 'booked';
+            const isBooked = currentTrainerTimes[days[i]] != 'open';
             if (currentTrainerTimes?.length === 0) {
                 return;
             }

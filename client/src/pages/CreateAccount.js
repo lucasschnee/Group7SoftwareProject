@@ -42,7 +42,8 @@ const CreateAccount = () => {
                 //         console.error("Error sending verification email: ", error);
                 //     }); //the email stuff is getting messed up
                 setCreatedSuccessfully(true);
-                
+                //add function to add user to database
+
                 setTimeout(() => {
                     
                     navigate("/about");

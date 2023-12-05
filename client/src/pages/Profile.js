@@ -4,21 +4,30 @@ import React, { useState, useEffect } from 'react';
 
 import {auth} from "../App"
 import {useAuthState} from "react-firebase-hooks/auth"
+const firebase = require("firebase/database");
+
 
 const Profile = () => {
 
     const [user, loading, error] = useAuthState(auth);
-    
-    // Create a backend function which is GET
-    // When you call it, send the uID
-    // the function will send back email, name, username, anything you need
-
+   
     return (
-        <div>
-            TEST
-            {user?.uid}
+        <div className="profile-page">
+
+
+            <div className="profile-background">
+                <div className="profile-data">
+                    <h2>Profile Data</h2>
+
+                    <p className="profile-data-entry">ID: {user?.uid}</p>
+                    <p className="profile-data-entry">Email: {user?.email}</p>
+
+                </div>
+            </div>
         </div>
     )
+
+
 }
 
 export default Profile;
